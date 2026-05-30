@@ -31,6 +31,86 @@
             padding: 50px 20px;
 
     font-family: Arial;
+}/* ===== CLEAN INTRO ONLY ===== */
+#intro{
+  position:fixed;
+  inset:0;
+  z-index:10;
+  cursor:pointer;
+}
+
+.intro-overlay{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)),
+    url("bg.jpg") center/cover no-repeat;
+}
+
+.intro-content{
+  position:relative;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+
+.intro-logo{
+  width:150px;
+  border-radius:50%;
+  animation:breath 3s ease-in-out infinite;
+}
+
+@keyframes breath{
+  0%{transform:scale(1);}
+  50%{transform:scale(1.05);}
+  100%{transform:scale(1);}
+}
+
+.intro-name{
+  margin-top:20px;
+  font-size:26px;
+  letter-spacing:4px;
+}
+
+.intro-enter{
+  margin-top:25px;
+  font-size:12px;
+  letter-spacing:2px;
+  opacity:0.7;
+}
+
+/* ===== MAIN PAGE (UNCHANGED) ===== */
+.main{
+  height:100%;
+  backdrop-filter:brightness(0.6);
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
+.logo{
+  width:120px;
+  border-radius:20px;
+  margin-bottom:15px;
+}
+
+h1{
+  letter-spacing:3px;
+}
+
+.subtitle{
+  opacity:0.85;
+  margin-top:5px;
+}
+
+.live{
+  margin:15px 0;
+  color:#00ffff;
+  letter-spacing:2px;
 }
         /* صورة الملف الشخصي */
         .profile-image {
@@ -148,6 +228,23 @@
 </head>
 <body>
 
+<!-- INTRO -->
+<div id="intro">
+  <div class="intro-overlay"></div>
+  <div class="intro-content">
+    <img src="file.jpg" class="intro-logo">
+    <h2 class="intro-name">omar SAMY</h2>
+    <span class="intro-enter">Tap to Enter</span>
+  </div>
+</div>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="113الفلق.mp3" type="audio/mpeg">
+</audio>
+
+<!-- MAIN PAGE -->
+<div class="main" id="main">
     <div class="container">
             <!-- صورة الملف الشخصي -->
     <img src="file.jpg"الصورة الشخصية" class="profile-image">
@@ -207,5 +304,23 @@ target="_blank">
       <p>© <span id="year"></span> <b>omar samy</b> — <span data-lang="rights">All rights reserved</span></p>
     <p><span data-lang="developed">Developed by</span> <a target="_blank" href="https://www.facebook.com/amr29913">amr khaled</a></p>
     </footer>
+    <script>
+const intro = document.getElementById("intro");
+const main = document.getElementById("main");
+const music = document.getElementById("bgMusic");
+
+intro.addEventListener("click", ()=>{
+  music.play();
+  intro.style.transition="opacity 0.8s";
+  intro.style.opacity="0";
+
+  setTimeout(()=>{
+    intro.style.display="none";
+    main.style.display="flex";
+  },800);
+});
+</script>
+
+
 </body>
 </html>
